@@ -125,7 +125,7 @@ public class CacheFileManager {
             logger.error("save: cannot save configuration. configuration = " + configuration);
         }
 
-        protected void save(String configurationId, JSONObject json) {
+        private void save(String configurationId, JSONObject json) {
             BufferedWriter out = null;
             File cachedFile = getFile(configurationId);
             File cachedDir = getFolder(configurationId);
@@ -133,11 +133,12 @@ public class CacheFileManager {
             try {
                 createDirsAndFile(cachedFile, cachedDir);
                 logger.trace("save: configurationId = " + configurationId + ",json = " + json);
-                FileWriter writer = new FileWriter(cachedFile, true);
+                FileWriter writer = new FileWriter(cachedFile, false);
                 out = new BufferedWriter(writer);
+                out.write(json.toString());
             }  catch (IOException e) {
                 logger.fatal("save: cannot save file:" + cachedFile.getAbsolutePath(), null, e);
-            } finally {
+            }  finally {
                 try {
                     if (out != null) {
                         out.flush();

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void obtainConfiguration (View view) {
-        LiveUpdateManager.getInstance().obtainConfiguration("ishai", true, new ConfigurationListener() {
+        LiveUpdateManager.getInstance().obtainConfiguration("ishai", new ConfigurationListener() {
             @Override
             public void onSuccess(Configuration configuration) {
                 Log.e("YYY", configuration.getProperty("ishai"));
