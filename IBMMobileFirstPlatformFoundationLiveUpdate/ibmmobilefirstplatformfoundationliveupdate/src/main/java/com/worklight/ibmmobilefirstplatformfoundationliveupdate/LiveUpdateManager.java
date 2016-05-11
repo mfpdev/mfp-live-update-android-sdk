@@ -120,6 +120,7 @@ public class LiveUpdateManager {
 
                 logger.trace("sendConfigRequest: saving configuration to cache. configuration = " +configuration);
                 LocalCache.saveConfiguration(configuration);
+                configurationListener.onSuccess(configuration);
             }
 
             @Override

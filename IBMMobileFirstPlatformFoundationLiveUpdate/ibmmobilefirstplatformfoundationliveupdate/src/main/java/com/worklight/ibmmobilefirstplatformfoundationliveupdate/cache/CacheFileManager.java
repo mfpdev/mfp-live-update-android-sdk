@@ -78,6 +78,10 @@ public class CacheFileManager {
             BufferedReader in = null;
             File cachedFile = getFile(configurationId);
 
+            if (!cachedFile.exists()) {
+                return null;
+            }
+
             JSONObject json = null;
 
             try {
@@ -92,16 +96,16 @@ public class CacheFileManager {
                 }
                 json =  new JSONObject(jsonSB.toString());
             }  catch (IOException e) {
-                logger.fatal("save: cannot save json file:" + cachedFile.getAbsolutePath(), null, e);
+                logger.error("read: cannot read json file:" + cachedFile.getAbsolutePath(), null, e);
             } catch (JSONException e) {
-                logger.fatal("save: cannot convert json file to JSONObject", null, e);
+                logger.error("read: cannot read json file to JSONObject", null, e);
             } finally {
                 try {
                     if (in != null) {
                         in.close();
                     }
                 }  catch (IOException e) {
-                    logger.fatal("save: cannot close file:" + cachedFile.getAbsolutePath(), null, e);
+                    logger.fatal("read: cannot close file:" + cachedFile.getAbsolutePath(), null, e);
                 }
             }
             return json;
@@ -124,7 +128,10 @@ public class CacheFileManager {
         protected void save(String configurationId, JSONObject json) {
             BufferedWriter out = null;
             File cachedFile = getFile(configurationId);
+            File cachedDir = getFolder(configurationId);
+
             try {
+                createDirsAndFile(cachedFile, cachedDir);
                 logger.trace("save: configurationId = " + configurationId + ",json = " + json);
                 FileWriter writer = new FileWriter(cachedFile, true);
                 out = new BufferedWriter(writer);
@@ -138,6 +145,21 @@ public class CacheFileManager {
                     }
                 }  catch (IOException e) {
                     logger.fatal("save: cannot close file:" + cachedFile.getAbsolutePath(), null, e);
+                }
+            }
+        }
+
+        private void createDirsAndFile(File cachedFile, File cachedDir) throws IOException {
+            if (!cachedDir.exists()) {
+                boolean isDirsCreated = cachedDir.mkdirs();
+                if (isDirsCreated) {
+                    logger.error("createDirsAndFile: cannot create dirs file:" + cachedDir.getAbsolutePath());
+                }
+            }
+            if (!cachedFile.exists()) {
+                boolean isFileCreated = cachedFile.createNewFile();
+                if (isFileCreated) {
+                    logger.error("createDirsAndFile: cannot create file file:" + cachedFile.getAbsolutePath());
                 }
             }
         }
