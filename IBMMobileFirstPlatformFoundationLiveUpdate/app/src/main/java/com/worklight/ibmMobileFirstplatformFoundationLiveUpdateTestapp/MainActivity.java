@@ -1,9 +1,13 @@
 package com.worklight.ibmMobileFirstplatformFoundationLiveUpdateTestapp;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.worklight.common.Logger;
 import com.worklight.ibmmobilefirstplatformfoundationliveupdate.LiveUpdateManager;
@@ -12,30 +16,111 @@ import com.worklight.ibmmobilefirstplatformfoundationliveupdate.api.Configuratio
 import com.worklight.wlclient.api.WLClient;
 import com.worklight.wlclient.api.WLFailResponse;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
+    private EditText segmentEditText;
+    private EditText paramsEditText;
+    private EditText featureEditText;
+    private EditText propertyEditText;
+    private CheckBox useCacheCheckBox;
+
+    private TextView propertyValue;
+    private TextView featureValue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        segmentEditText = (EditText) this.findViewById(R.id.segmentEditText);
+        paramsEditText = (EditText) this.findViewById(R.id.paramsEditText);
+        featureEditText = (EditText) this.findViewById(R.id.featureEditText);
+        propertyEditText = (EditText) this.findViewById(R.id.propertyEditText);
+        useCacheCheckBox = (CheckBox) this.findViewById(R.id.useCacheCheckBox);
+        featureValue = (TextView) this.findViewById(R.id.featureValue);
+        propertyValue = (TextView) this.findViewById(R.id.propertyValue);
+
         WLClient.createInstance(this);
         Logger.setContext(this);
     }
 
     public void obtainConfiguration (View view) {
-        LiveUpdateManager.getInstance().obtainConfiguration("ishai", new ConfigurationListener() {
-            @Override
-            public void onSuccess(Configuration configuration) {
-                Log.e("YYY", configuration.getProperty("ishai"));
-                Log.e("YYY", configuration.isFeatureEnabled("ishai").toString());
-            }
+        String segment = segmentEditText.getText().toString();
+        boolean useCache = useCacheCheckBox.isChecked();
+        final String feature =  featureEditText.getText().toString();
+        final String property = propertyEditText.getText().toString();
 
+        propertyValue.setText("");
+        featureValue.setText("");
+
+        if (feature.trim().equals("") || property.trim().equals("")) {
+            Log.e("obtainConfiguration", "Feature and property is mandatory fields");
+            return;
+        }
+
+        //Obtain configuration by segment
+        if (!segment.trim().equals("")) {
+            LiveUpdateManager.getInstance().obtainConfiguration(segment, useCache, new ConfigurationListener() {
+                @Override
+                public void onSuccess(final Configuration configuration) {
+                    updateResults(configuration, property, feature);
+                }
+
+                @Override
+                public void onFailure(WLFailResponse wlFailResponse) {
+                    MainActivity.this.onFailure(wlFailResponse);
+                }
+            });
+        } else {
+            Map<String, String> params = getParams();
+            //Obtain configuration by params
+            LiveUpdateManager.getInstance().obtainConfiguration(params, useCache, new ConfigurationListener() {
+                @Override
+                public void onSuccess(final Configuration configuration) {
+                    updateResults(configuration, property, feature);
+                }
+
+                @Override
+                public void onFailure(WLFailResponse wlFailResponse) {
+                    MainActivity.this.onFailure(wlFailResponse);
+                }
+            });
+        }
+    }
+
+    private void updateResults(final Configuration configuration, final String property, final String feature) {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onFailure(WLFailResponse wlFailResponse) {
-                Log.e("XXX", wlFailResponse.getErrorMsg());
-                Log.e("XXX", wlFailResponse.getErrorCode().getDescription());
+            public void run() {
+                propertyValue.setText(configuration.getProperty(property));
+                Boolean isFeatureEnabled = configuration.isFeatureEnabled(feature);
+                if (isFeatureEnabled != null) {
+                    featureValue.setText(configuration.isFeatureEnabled(feature).toString());
+                }
             }
         });
     }
+
+    @NonNull
+    private Map<String, String> getParams() {
+        Map<String,String> params = new HashMap<>();
+        for (String paramPair : paramsEditText.getText().toString().split(",")) {
+            String [] paramPairArray = paramPair.split(":");
+            if (paramPairArray.length > 1) {
+                params.put(paramPairArray[0], paramPairArray[1]);
+            }
+        }
+        return params;
+    }
+
+
+    private void onFailure(WLFailResponse wlFailResponse) {
+        Log.e("obtainConfiguration", wlFailResponse.getErrorMsg());
+        Log.e("obtainConfiguration", wlFailResponse.getErrorCode().getDescription());
+    }
+
+
 }

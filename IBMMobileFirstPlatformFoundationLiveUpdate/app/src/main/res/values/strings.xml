@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">IBMMobileFirstPlatformFoundationLiveUpdate</string>
+    <string name="liveupdate_testapp">LiveUpdate TestApp</string>
+    <string name="segment">Segment</string>
+    <string name="params">Params</string>
+    <string name="feature">Feature</string>
+    <string name="property">Property</string>
 </resources>
