@@ -105,13 +105,13 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         LiveUpdateManager.getInstance().obtainConfiguration("nonExitingSegment", new ConfigurationListener() {
             @Override
             public void onSuccess(final Configuration configuration) {
-                testConfig = configuration;
                 currentThread.interrupt();
             }
 
             @Override
             public void onFailure(WLFailResponse wlFailResponse) {
                 testFailResponse = wlFailResponse;
+                currentThread.interrupt();
             }
         });
 
