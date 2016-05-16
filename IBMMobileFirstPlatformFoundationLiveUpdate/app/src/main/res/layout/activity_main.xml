@@ -39,7 +39,8 @@
         <EditText
             android:layout_width="366dp"
             android:layout_height="wrap_content"
-            android:id="@+id/segmentEditText" />
+            android:id="@+id/segmentEditText"
+            android:text="segment1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,7 +74,7 @@
                 android:layout_width="186dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/featureEditText"
-                />
+                android:text="feature1" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,7 +101,8 @@
             <EditText
                 android:layout_width="185dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/propertyEditText" />
+                android:id="@+id/propertyEditText"
+                android:text="property1" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
