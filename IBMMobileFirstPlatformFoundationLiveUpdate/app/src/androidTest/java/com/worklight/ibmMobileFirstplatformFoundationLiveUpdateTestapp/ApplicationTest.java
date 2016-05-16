@@ -47,7 +47,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         assertNull(testConfig.getProperty("featureNotExist"));
     }
 
-    public void testGetByParams() throws Exception {
+    public void testObtainConfigurationWithParams() throws Exception {
         final Thread currentThread = Thread.currentThread();
         LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>(), false, new ConfigurationListener() {
             @Override
@@ -58,7 +58,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
             @Override
             public void onFailure(WLFailResponse wlFailResponse) {
-                Assert.fail("Should not return fail response " + wlFailResponse.getErrorMsg());
+                currentThread.interrupt();
             }
         });
 
@@ -72,7 +72,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         assertConfig();
     }
 
-    public void testGetBySegment() throws Exception {
+    public void testObtainConfigurationWithSegment() throws Exception {
         final Thread currentThread = Thread.currentThread();
         LiveUpdateManager.getInstance().obtainConfiguration("segment1", false, new ConfigurationListener() {
             @Override
@@ -83,7 +83,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
             @Override
             public void onFailure(WLFailResponse wlFailResponse) {
-                Assert.fail("Should not return fail response " + wlFailResponse.getErrorMsg());
+                currentThread.interrupt();
             }
         });
 

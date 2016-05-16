@@ -19,6 +19,7 @@ import com.worklight.wlclient.api.WLFailResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class MainActivity extends AppCompatActivity {
     private EditText segmentEditText;
     private EditText paramsEditText;
