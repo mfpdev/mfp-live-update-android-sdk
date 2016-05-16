@@ -122,6 +122,6 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         } catch (InterruptedException e) {
         }
 
-        assertEquals(testFailResponse.getStatus(), 404);
+        assertEquals(404,testFailResponse.getStatus());
     }
 }
