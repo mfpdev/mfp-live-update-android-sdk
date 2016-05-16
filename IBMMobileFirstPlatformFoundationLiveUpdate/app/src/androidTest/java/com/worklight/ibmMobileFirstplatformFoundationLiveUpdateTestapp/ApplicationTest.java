@@ -25,6 +25,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
     Context context;
     Configuration testConfig;
+    WLFailResponse testFailResponse;
 
     public void setUp() throws Exception {
         super.setUp();
@@ -34,6 +35,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         WLClient.createInstance(context);
         Logger.setContext(context);
         testConfig = null;
+        testFailResponse = null;
     }
 
 
@@ -74,7 +76,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
     public void testObtainConfigurationWithSegment() throws Exception {
         final Thread currentThread = Thread.currentThread();
-        LiveUpdateManager.getInstance().obtainConfiguration("segment1", false, new ConfigurationListener() {
+        LiveUpdateManager.getInstance().obtainConfiguration("segment1", new ConfigurationListener() {
             @Override
             public void onSuccess(final Configuration configuration) {
                 testConfig = configuration;
@@ -95,5 +97,31 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         }
 
         assertConfig ();
+    }
+
+    public void testObtainNonExitingSegment() throws Exception {
+        final Thread currentThread = Thread.currentThread();
+        WLFailResponse failResponse;
+        LiveUpdateManager.getInstance().obtainConfiguration("nonExitingSegment", new ConfigurationListener() {
+            @Override
+            public void onSuccess(final Configuration configuration) {
+                testConfig = configuration;
+                currentThread.interrupt();
+            }
+
+            @Override
+            public void onFailure(WLFailResponse wlFailResponse) {
+                testFailResponse = wlFailResponse;
+            }
+        });
+
+
+        //Wait 10 seconds for response in maximum
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+        }
+
+        assertEquals(testFailResponse.getStatus(), 404);
     }
 }
