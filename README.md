@@ -16,6 +16,7 @@ dependencies {
 
 ```Java
 LiveUpdateManager.getInstance().obtainConfiguration("segment1", new ConfigurationListener() {
+    
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
@@ -34,6 +35,7 @@ LiveUpdateManager.getInstance().obtainConfiguration("segment1", new Configuratio
 LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>() {{
             put("paramKey","paramValue");
         }}, new ConfigurationListener() {
+   
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
@@ -51,6 +53,7 @@ LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>(
 
 ```Java
 LiveUpdateManager.getInstance().obtainConfiguration("segment1", false, new ConfigurationListener() {
+    
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
