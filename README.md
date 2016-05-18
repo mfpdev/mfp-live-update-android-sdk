@@ -1,11 +1,22 @@
 # MFP LiveUpdate Android SDK
 
-## Sample usages of the API
+### Install Using Gradle
+```gradle
+dependencies {
+    compile group: 'com.ibm.mobile.foundation',
+            name: 'ibmmobilefirstplatformfoundationliveupdate',
+            version: '8.0.+',
+            ext: 'aar',
+            transitive: true
+}   
+```
+### Sample Usages Of The API
 
-#### By Segment :
+#### Obtain Configuration By Segment :
 
 ```Java
 LiveUpdateManager.getInstance().obtainConfiguration("segment1", new ConfigurationListener() {
+    
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
@@ -18,12 +29,13 @@ LiveUpdateManager.getInstance().obtainConfiguration("segment1", new Configuratio
 });
 ```
 
-#### By Params :
+#### Obtain Configuration By Params :
 
 ```Java
 LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>() {{
             put("paramKey","paramValue");
         }}, new ConfigurationListener() {
+   
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
@@ -41,6 +53,7 @@ LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>(
 
 ```Java
 LiveUpdateManager.getInstance().obtainConfiguration("segment1", false, new ConfigurationListener() {
+    
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
