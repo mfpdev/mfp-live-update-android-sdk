@@ -51,7 +51,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
     public void testObtainConfigurationWithParams() throws Exception {
         final Thread currentThread = Thread.currentThread();
-        LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>(), false, new ConfigurationListener() {
+        LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>(){}, false, new ConfigurationListener() {
             @Override
             public void onSuccess(final Configuration configuration) {
                 testConfig = configuration;
