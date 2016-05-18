@@ -10,7 +10,7 @@ dependencies {
             transitive: true
 }   
 ```
-### Sample usages of the API
+### Sample Usages Of The API
 
 #### Obtain Configuration By Segment :
 
