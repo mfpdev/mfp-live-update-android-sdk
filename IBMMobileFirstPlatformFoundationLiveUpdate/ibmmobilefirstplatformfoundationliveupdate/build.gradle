@@ -37,15 +37,9 @@ dependencies {
 
 apply plugin: 'maven'
 
-ext {
-    PUBLISH_GROUP_ID = 'com.ibm.mobile.foundation'
-    PUBLISH_ARTIFACT_ID = 'ibmmobilefirstplatformfoundationliveupdate'
-    PUBLISH_VERSION = '8.0.0-SNAPSHOT'
-}
-
-def groupId = project.PUBLISH_GROUP_ID
-def artifactId = project.PUBLISH_ARTIFACT_ID
-def version = project.PUBLISH_VERSION
+def groupId = PUBLISH_GROUP_ID
+def artifactId = PUBLISH_ARTIFACT_ID
+def version = PUBLISH_VERSION
 
 def localReleaseDest = "${buildDir}/release/${version}"
 

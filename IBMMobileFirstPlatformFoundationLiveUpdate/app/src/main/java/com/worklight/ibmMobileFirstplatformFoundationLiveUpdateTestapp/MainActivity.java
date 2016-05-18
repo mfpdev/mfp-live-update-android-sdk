@@ -19,7 +19,12 @@ import com.worklight.wlclient.api.WLFailResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Test Application for LiveUpdate
+ *
+ * @author Ishai Borovoy
+ * @since 8.0.0
+ */
 public class MainActivity extends AppCompatActivity {
     private EditText segmentEditText;
     private EditText paramsEditText;
@@ -122,6 +127,4 @@ public class MainActivity extends AppCompatActivity {
         Log.e("obtainConfiguration", wlFailResponse.getErrorMsg());
         Log.e("obtainConfiguration", wlFailResponse.getErrorCode().getDescription());
     }
-
-
 }

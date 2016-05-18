@@ -11,8 +11,6 @@ import com.worklight.ibmmobilefirstplatformfoundationliveupdate.api.Configuratio
 import com.worklight.wlclient.api.WLClient;
 import com.worklight.wlclient.api.WLFailResponse;
 
-import junit.framework.Assert;
-
 import java.util.HashMap;
 
 /**

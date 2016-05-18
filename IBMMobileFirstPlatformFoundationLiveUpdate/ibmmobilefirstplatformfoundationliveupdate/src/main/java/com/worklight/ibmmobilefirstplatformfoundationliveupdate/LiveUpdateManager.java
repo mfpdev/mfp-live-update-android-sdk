@@ -15,7 +15,12 @@ import java.net.URI;
 import java.util.Map;
 
 /**
- * Created by ishaib on 09/05/16.
+ * LiveUpdateManager
+ * </p>
+ * A manager class which let consumes the LiveUpdate APIs
+ *
+ * @author Ishai Borovoy
+ * @since 8.0.0
  */
 
 public class LiveUpdateManager {
@@ -37,42 +42,48 @@ public class LiveUpdateManager {
     }
 
     /**
-     * obtainConfiguration
-     * @param segment
-     * @param configurationListener
+     * obtainConfiguration - obtains a configuration from server / cache by a segment id
+     * </p>
+     * The cache is enabled for this API
+     *
+     * @param segmentId - the segment id
+     * @param configurationListener - the configuration listener for receiving the configuration
      */
-    public void obtainConfiguration (String segment, ConfigurationListener configurationListener) {
-        this.obtainConfiguration(segment, true, configurationListener);
+    public void obtainConfiguration (String segmentId, ConfigurationListener configurationListener) {
+        this.obtainConfiguration(segmentId, true, configurationListener);
     }
 
     /**
-     * obtainConfiguration
-     * @param params
-     * @param configurationListener
+     * obtainConfiguration - obtains a configuration from server / cache by a segment id
+     * </p>
+     * The cache is enabled for this API
+     *
+     * @param params - the params used by the server to return a configuration
+     * @param configurationListener - the configuration listener for receiving the configuration
      */
     public void obtainConfiguration (Map<String,String> params, ConfigurationListener configurationListener) {
         this.obtainConfiguration(params, true, configurationListener);
     }
 
     /**
-     * obtainConfiguration
-     * @param segment
-     * @param useCache
-     * @param configurationListener
+     * obtainConfiguration - obtains a configuration from server / cache by a segment id
+     * @param segmentId - the segment id
+     * @param useCache - true to used cache, false to always obtains from server
+     * @param configurationListener - the configuration listener for receiving the configuration
      */
-    public void obtainConfiguration (String segment, boolean useCache, ConfigurationListener configurationListener) {
-        URI url = URI.create(SERVICE_URL + "/" + segment);
+    public void obtainConfiguration (String segmentId, boolean useCache, ConfigurationListener configurationListener) {
+        URI url = URI.create(SERVICE_URL + "/" + segmentId);
 
 
-        logger.debug("obtainConfiguration: segment = " + segment + ", useCache = " + useCache + ", url = " + url);
-        this.obtainConfiguration(segment, url, null, useCache, configurationListener);
+        logger.debug("obtainConfiguration: segment = " + segmentId + ", useCache = " + useCache + ", url = " + url);
+        this.obtainConfiguration(segmentId, url, null, useCache, configurationListener);
     }
 
     /**
-     * obtainConfiguration
-     * @param params
-     * @param useCache
-     * @param configurationListener
+     * obtainConfiguration - obtains a configuration from server / cache by params
+     * @param params - the params used by the server to return a configuration
+     * @param useCache - true to used cache, false to always obtains from server
+     * @param configurationListener - the configuration listener for receiving the configuration
      */
     public void obtainConfiguration (Map<String,String> params, boolean useCache, ConfigurationListener configurationListener) {
         URI url = URI.create(SERVICE_URL);
@@ -93,6 +104,7 @@ public class LiveUpdateManager {
             sendConfigRequest(id, url, params, configurationListener);
         }
     }
+
 
     private void sendConfigRequest(final String id, URI url, Map<String,String> params, final ConfigurationListener configurationListener) {
         WLResourceRequest configurationServiceRequest = new WLResourceRequest(url, WLResourceRequest.GET, CONFIGURATION_SCOPE);

@@ -3,7 +3,12 @@ package com.worklight.ibmmobilefirstplatformfoundationliveupdate.cache;
 import com.worklight.ibmmobilefirstplatformfoundationliveupdate.api.Configuration;
 
 /**
- * Created by ishaib on 09/05/16.
+ * CacheFileManager
+ * a facade class to the CacheFileManager
+ *
+ * @since 8.0.0
+ * @author Ishai Borovoy
+ * @see CacheFileManager
  */
 public class LocalCache {
 

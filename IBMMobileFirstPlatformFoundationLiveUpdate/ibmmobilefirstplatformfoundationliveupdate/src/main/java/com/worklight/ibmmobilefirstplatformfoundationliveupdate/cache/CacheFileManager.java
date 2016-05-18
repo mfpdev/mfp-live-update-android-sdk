@@ -20,7 +20,10 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * Created by ishaib on 10/05/16.
+ * CacheFileManager
+ *
+ * @since 8.0.0
+ * @author Ishai Borovoy
  */
 public class CacheFileManager {
     private static final Logger logger = Logger.getInstance(CacheFileManager.class.getName());

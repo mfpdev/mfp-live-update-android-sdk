@@ -7,7 +7,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by ishaib on 09/05/16.
+ * ConfigurationInstance - an implementation class for Configuration
+ *
+ * @since 8.0.0
+ * @author Ishai Borovoy
+ * @see Configuration
  */
 public class ConfigurationInstance implements Configuration{
     private static final Logger logger = Logger.getInstance(ConfigurationInstance.class.getName());
