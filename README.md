@@ -1,6 +1,6 @@
 # MFP LiveUpdate Android SDK
 
-## Install Using Gradle
+### Install Using Gradle
 ```gradle
 dependencies {
     compile group: 'com.ibm.mobile.foundation',
@@ -10,7 +10,7 @@ dependencies {
             transitive: true
 }   
 ```
-## Sample usages of the API
+### Sample usages of the API
 
 #### Obtain Configuration By Segment :
 
