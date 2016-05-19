@@ -1,4 +1,9 @@
-# MFP LiveUpdate Android SDK
+MobileFirst Platform - LiveUpdate Android SDK
+===
+
+This package contains the LiveUpdate SDK for Android
+
+###Installation
 
 ### Install Using Gradle
 ```gradle
@@ -16,7 +21,7 @@ dependencies {
 
 ```Java
 LiveUpdateManager.getInstance().obtainConfiguration("segment1", new ConfigurationListener() {
-    
+
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
@@ -35,7 +40,7 @@ LiveUpdateManager.getInstance().obtainConfiguration("segment1", new Configuratio
 LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>() {{
             put("paramKey","paramValue");
         }}, new ConfigurationListener() {
-   
+
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
@@ -53,7 +58,7 @@ LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>(
 
 ```Java
 LiveUpdateManager.getInstance().obtainConfiguration("segment1", false, new ConfigurationListener() {
-    
+
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
@@ -66,5 +71,23 @@ LiveUpdateManager.getInstance().obtainConfiguration("segment1", false, new Confi
 });
 ```
 
-## License
-IBM
+###Contents
+LiveUpdate Android SDK for query client runtime configuration from the server.
+
+
+###Supported Levels
+- API Level: 16 Android 4.1 and above
+
+Copyright 2015 IBM Corp.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
