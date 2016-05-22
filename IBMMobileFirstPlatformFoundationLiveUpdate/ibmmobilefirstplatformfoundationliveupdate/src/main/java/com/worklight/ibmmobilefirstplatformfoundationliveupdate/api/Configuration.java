@@ -26,16 +26,16 @@ package com.worklight.ibmmobilefirstplatformfoundationliveupdate.api;
 public interface Configuration {
     /**
      * Check if a feature is enabled
-     * @param featureName - the feature name to be checked
+     * @param featureId - the feature name to be checked
      * @return true if feature is enabled and null for non existing feature.
      */
-    public Boolean isFeatureEnabled (String featureName);
+    public Boolean isFeatureEnabled (String featureId);
 
 
     /**
      * Get value of a property
-     * @param propertyName -  the property name
+     * @param propertyId -  the property name
      * @return the value for the given propertyName, or null in case the property is not exist
      */
-    public String getProperty (String propertyName);
+    public String getProperty (String propertyId);
 }

@@ -52,23 +52,23 @@ public class ConfigurationInstance implements Configuration{
     }
 
     @Override
-    public Boolean isFeatureEnabled(String featureName) {
+    public Boolean isFeatureEnabled(String featureId) {
         Boolean isFeatureEnabled = null;
         try {
-            isFeatureEnabled =  this.data.getJSONObject(DATA_KEY).getJSONObject(FEATURES_KEY).getBoolean(featureName);
+            isFeatureEnabled =  this.data.getJSONObject(DATA_KEY).getJSONObject(FEATURES_KEY).getBoolean(featureId);
         } catch (JSONException e) {
-            logger.error("isFeatureEnabled: Cannot get feature " + featureName);
+            logger.error("isFeatureEnabled: Cannot get feature " + featureId);
         }
         return isFeatureEnabled;
     }
 
     @Override
-    public String getProperty(String propertyName) {
+    public String getProperty(String propertyId) {
         String property = null;
         try {
-            property =  this.data.getJSONObject(DATA_KEY).getJSONObject(PROPERTIES_KEY).getString(propertyName);
+            property =  this.data.getJSONObject(DATA_KEY).getJSONObject(PROPERTIES_KEY).getString(propertyId);
         } catch (JSONException e) {
-            logger.error("getProperty: Cannot get property " + propertyName);
+            logger.error("getProperty: Cannot get property " + propertyId);
         }
         return property;
     }
