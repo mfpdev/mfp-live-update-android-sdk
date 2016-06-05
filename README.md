@@ -1,7 +1,9 @@
-MobileFirst Platform - LiveUpdate Android SDK
+MobileFirst Foundation - LiveUpdate Android SDK
 ===
 
-This package contains the LiveUpdate SDK for Android
+###Contents
+LiveUpdate Android SDK lets you query runtime configuration properties and features which you set in the LiveUpdate Settings screen in the MobileFirst Operations Console.
+With LiveUpdate integrated in your application you can implement feature toggling, A/B testing, feature segmentation and more.
 
 ###Installation
 
@@ -70,10 +72,6 @@ LiveUpdateManager.getInstance().obtainConfiguration("segment1", false, new Confi
     }
 });
 ```
-
-###Contents
-LiveUpdate Android SDK for query client runtime configuration from the server.
-
 
 ###Supported Levels
 - API Level: 16 Android 4.1 and above
