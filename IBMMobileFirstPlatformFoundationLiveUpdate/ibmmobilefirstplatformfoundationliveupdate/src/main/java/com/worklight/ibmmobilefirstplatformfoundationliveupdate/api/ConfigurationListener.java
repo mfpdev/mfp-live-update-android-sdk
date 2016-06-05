@@ -20,7 +20,7 @@ import com.worklight.wlclient.api.WLFailResponse;
 /**
  * ConfigurationListener interface
  * </p>
- * Listener to use when calling to obtainConfiguration
+ * Listener for obtainConfiguration API
  *
  * @see com.worklight.ibmmobilefirstplatformfoundationliveupdate.LiveUpdateManager
  * @author Ishai Borovoy
@@ -28,7 +28,7 @@ import com.worklight.wlclient.api.WLFailResponse;
  */
 public interface ConfigurationListener {
     /***
-     * This method is called when succeed to obtain configuration from the server / cache
+     * This method is called when obtain configuration from the server / cache is successful
      *
      * @param configuration - the obtained configuration from server / cache
      * @see Configuration
@@ -36,7 +36,7 @@ public interface ConfigurationListener {
     void onSuccess(Configuration configuration);
 
     /***
-     * This method is called when failed to obtain configuration from the server / cache
+     * This method is called when obtain configuration from the server / cache is unsuccessful
      *
      * @param wlFailResponse - the failure response object
      * @see  WLFailResponse

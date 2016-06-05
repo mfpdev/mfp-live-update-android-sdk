@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * LiveUpdateManager
  * </p>
- * A manager class which let consumes the LiveUpdate APIs
+ * A manager class for the  LiveUpdate APIs
  *
  * @author Ishai Borovoy
  * @since 8.0.0
@@ -47,7 +47,7 @@ public class LiveUpdateManager {
     private static final Logger logger = Logger.getInstance(LiveUpdateManager.class.getName());
     /**
      * getInstance
-     * @return LiveUpdateManager instance
+     * @return LiveUpdateManager singleton instance
      */
     public static LiveUpdateManager getInstance() {
         return instance;
@@ -69,11 +69,11 @@ public class LiveUpdateManager {
     }
 
     /**
-     * obtainConfiguration - obtains a configuration from server / cache by a segment id
+     * obtainConfiguration - obtains a configuration from server / cache by params
      * </p>
      * The cache is enabled for this API
      *
-     * @param params - the params used by the server to return a configuration
+     * @param params - the params used by the server to return a configuration.
      * @param configurationListener - the configuration listener for receiving the configuration
      */
     public void obtainConfiguration (Map<String,String> params, ConfigurationListener configurationListener) {
@@ -83,7 +83,7 @@ public class LiveUpdateManager {
     /**
      * obtainConfiguration - obtains a configuration from server / cache by a segment id
      * @param segmentId - the segment id
-     * @param useCache - true to used cache, false to always obtains from server
+     * @param useCache - true to use cache, false to always obtains from server
      * @param configurationListener - the configuration listener for receiving the configuration
      */
     public void obtainConfiguration (String segmentId, boolean useCache, ConfigurationListener configurationListener) {
@@ -97,7 +97,7 @@ public class LiveUpdateManager {
     /**
      * obtainConfiguration - obtains a configuration from server / cache by params
      * @param params - the params used by the server to return a configuration
-     * @param useCache - true to used cache, false to always obtains from server
+     * @param useCache - true to use cache, false to always obtain configuration from server
      * @param configurationListener - the configuration listener for receiving the configuration
      */
     public void obtainConfiguration (Map<String,String> params, boolean useCache, ConfigurationListener configurationListener) {
