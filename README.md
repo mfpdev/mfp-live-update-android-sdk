@@ -17,6 +17,10 @@ dependencies {
             transitive: true
 }   
 ```
+
+### Configuration In MobileFirst Operation Console
+In your application under Scope-Elements Mapping in security tab you must map the scope 'configuration-user-login' to security check, you can map it to empty string if you want to use the default protection.  More info about [scope mapping](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/authentication-and-security/authorization-concepts/#scope-mapping)
+
 ### Sample Usages Of The API
 
 #### Obtain Configuration By Segment :

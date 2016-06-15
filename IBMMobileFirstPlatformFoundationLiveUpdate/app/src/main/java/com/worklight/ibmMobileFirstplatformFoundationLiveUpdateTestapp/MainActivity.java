@@ -140,6 +140,5 @@ public class MainActivity extends AppCompatActivity {
 
     private void onFailure(WLFailResponse wlFailResponse) {
         Log.e("obtainConfiguration", wlFailResponse.getErrorMsg());
-        Log.e("obtainConfiguration", wlFailResponse.getErrorCode().getDescription());
     }
 }
