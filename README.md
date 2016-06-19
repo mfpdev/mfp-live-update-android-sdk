@@ -12,7 +12,7 @@ With LiveUpdate integrated in your application you can implement feature togglin
 dependencies {
     compile group: 'com.ibm.mobile.foundation',
             name: 'ibmmobilefirstplatformfoundationliveupdate',
-            version: '8.0.+',
+            version: '8.0.0',
             ext: 'aar',
             transitive: true
 }   
