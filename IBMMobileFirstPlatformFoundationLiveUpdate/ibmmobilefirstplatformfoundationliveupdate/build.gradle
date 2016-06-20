@@ -26,6 +26,7 @@ android {
         versionCode 8
         versionName "8.0.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -36,6 +37,11 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
@@ -48,102 +54,4 @@ dependencies {
             version: '8.0.+',
             ext: 'aar',
             transitive: true
-}
-
-
-apply plugin: 'maven'
-
-def groupId = PUBLISH_GROUP_ID
-def artifactId = PUBLISH_ARTIFACT_ID
-def version = PUBLISH_VERSION
-
-def localReleaseDest = "${buildDir}/release/${version}"
-
-task clearJar(type: Delete) {
-    delete 'target/'+ project.name + '.jar'
-    delete 'build/libs/'+ project.name + '.jar'
-}
-
-task clearTargetClasses(type: Delete){
-    delete 'target/classes'
-}
-
-task clearAARFromTarget(type: Delete){
-    delete 'target/' + project.name + '.aar'
-}
-
-clean.dependsOn clearJar
-clean.dependsOn clearTargetClasses
-clean.dependsOn clearAARFromTarget
-
-//Include resource files into generated JAR:
-task copyResourcesToClassesFolderRelease(type: Copy){
-    from 'src/main/resources/'
-    into 'build/intermediates/classes/release/'
-    include '**/*.properties'
-}
-
-task copyResourcesToClassesFolderDebug(type: Copy){
-    from 'src/main/resources/'
-    into 'build/intermediates/classes/debug/'
-    include '**/*.properties'
-}
-
-copyResourcesToClassesFolderRelease.dependsOn copyResourcesToClassesFolderDebug
-
-//By default, it puts the JAR in /build/libs.
-task createJar(type: Jar) {
-    from 'build/intermediates/classes/release/'
-    archiveName project.name + '.jar'
-    exclude '**/BuildConfig.*'
-}
-
-task makeJar(type: Copy) {
-    from 'build/libs'
-    into 'target/'
-    include project.name + '.jar'
-}
-
-
-task copyJavaDocToAAR(type: Copy){
-    from 'build/libs/'
-    into 'src/main/assets'
-    rename { String fileName ->
-        fileName = 'ibmmobilefirstplatformfoundationliveupdate-javadoc.jar'
-    }
-}
-
-preBuild.dependsOn copyJavaDocToAAR
-makeJar.dependsOn clearJar
-makeJar.dependsOn copyResourcesToClassesFolderRelease
-makeJar.dependsOn createJar
-
-
-task generateJavadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-
-    exclude '**/BuildConfig.java'
-    exclude '**/R.java'
-    exclude '**/internal/**'
-
-    options.links 'http://docs.oracle.com/javase/7/docs/api/'
-
-    options.encoding 'UTF-8'
-
-    options.memberLevel = JavadocMemberLevel.PUBLIC
-
-    setTitle 'IBM MobileFirst Foundation LiveUpdate Android SDK'
-}
-
-task androidJavadocsJar(type: Jar, dependsOn: generateJavadoc) {
-    classifier = 'javadoc'
-    from generateJavadoc.destinationDir
-}
-
-artifacts {
-    archives androidJavadocsJar
-}
-
-def getVersion() {
-    return '8.0.0'
 }
