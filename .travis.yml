@@ -4,4 +4,4 @@ android:
     - build-tools-23.0.1
     - android-23
     - extra
-script: cd IBMMobileFirstPlatformFoundationLiveUpdate && gradle build
+script: cd IBMMobileFirstPlatformFoundationLiveUpdate && ./gradlew assembleRelease
