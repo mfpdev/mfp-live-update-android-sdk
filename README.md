@@ -1,6 +1,8 @@
 MobileFirst Foundation - LiveUpdate Android SDK
 ===
 
+![Buid status](https://travis-ci.org/mfpdev/mfp-live-update-android-sdk.svg?branch=master)
+
 ###Contents
 LiveUpdate Android SDK lets you query runtime configuration properties and features which you set in the LiveUpdate Settings screen in the MobileFirst Operations Console.
 With LiveUpdate integrated in your application you can implement feature toggling, A/B testing, feature segmentation and more.
