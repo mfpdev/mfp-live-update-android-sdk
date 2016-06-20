@@ -1,7 +1,7 @@
 MobileFirst Foundation - LiveUpdate Android SDK
 ===
 
-![Buid status](https://travis-ci.org/mfpdev/mfp-live-update-android-sdk.svg?branch=master)
+[![Build Status](https://travis-ci.org/mfpdev/mfp-live-update-android-sdk.svg?branch=master)](https://travis-ci.org/mfpdev/mfp-live-update-android-sdk)
 
 ###Contents
 LiveUpdate Android SDK lets you query runtime configuration properties and features which you set in the LiveUpdate Settings screen in the MobileFirst Operations Console.
