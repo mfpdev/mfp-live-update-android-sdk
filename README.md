@@ -10,11 +10,17 @@ With LiveUpdate integrated in your application you can implement feature togglin
 ### Install Using Gradle
 ```gradle
 dependencies {
-    compile group: 'com.ibm.mobile.foundation',
-            name: 'ibmmobilefirstplatformfoundationliveupdate',
-            version: '8.0.0',
-            ext: 'aar',
-            transitive: true
+  compile group: 'com.ibm.mobile.foundation',
+       name: 'ibmmobilefirstplatformfoundation',
+       version: '8.0.+',
+       ext: 'aar',
+       transitive: true
+
+  compile group: 'com.ibm.mobile.foundation',
+          name: 'ibmmobilefirstplatformfoundationliveupdate',
+          version: '8.0.0',
+          ext: 'aar',
+          transitive: true
 }   
 ```
 
@@ -31,6 +37,7 @@ LiveUpdateManager.getInstance().obtainConfiguration("segment1", new Configuratio
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
+      Log.i("LiveUpdateSample", configuration.isFeatureEnabled("feature1").toString());
     }
 
     @Override
@@ -50,6 +57,7 @@ LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>(
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
+      Log.i("LiveUpdateSample", configuration.isFeatureEnabled("feature1").toString());
     }
 
     @Override
@@ -68,6 +76,7 @@ LiveUpdateManager.getInstance().obtainConfiguration("segment1", false, new Confi
     @Override
     public void onSuccess(final Configuration configuration) {
       Log.i("LiveUpdateSample", configuration.getProperty("property1"));
+      Log.i("LiveUpdateSample", configuration.isFeatureEnabled("feature1").toString());
     }
 
     @Override
