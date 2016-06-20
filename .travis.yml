@@ -1,7 +1,7 @@
 language: android
 android:
   components:
-    - build-tools-23.0.1
-    - android-23
+    - build-tools-19.1.0
+    - android-19
     - extra
 script: cd IBMMobileFirstPlatformFoundationLiveUpdate && ./gradlew assembleRelease
