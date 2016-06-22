@@ -28,6 +28,7 @@ import com.worklight.wlclient.api.WLClient;
 import com.worklight.wlclient.api.WLFailResponse;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
@@ -38,7 +39,8 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     Context context;
-    Configuration testConfig;
+    Configuration testConfig1;
+    Configuration testConfig2;
     WLFailResponse testFailResponse;
 
     public void setUp() throws Exception {
@@ -48,27 +50,40 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
         WLClient.createInstance(context);
         Logger.setContext(context);
-        testConfig = null;
+        testConfig1 = null;
+        testConfig2 = null;
         testFailResponse = null;
     }
 
+    private void assertConfig2 () {
+        assertEquals(testConfig2.getProperty("property1"), "value11");
+        assertEquals(testConfig2.getProperty("property2"), "value22");
+        assertEquals(testConfig2.isFeatureEnabled("feature1"), Boolean.FALSE);
+        assertEquals(testConfig2.isFeatureEnabled("feature2"), Boolean.TRUE);
 
-    private void assertConfig () {
-        assertEquals(testConfig.getProperty("property1"), "value1");
-        assertEquals(testConfig.getProperty("property2"), "value2");
-        assertEquals(testConfig.isFeatureEnabled("feature1"), Boolean.TRUE);
-        assertEquals(testConfig.isFeatureEnabled("feature2"), Boolean.FALSE);
+        assertNull(testConfig2.getProperty("notExistProperty"));
+        assertNull(testConfig2.getProperty("featureNotExist"));
+    }
 
-        assertNull(testConfig.getProperty("notExistProperty"));
-        assertNull(testConfig.getProperty("featureNotExist"));
+    private void assertConfig1 () {
+        assertEquals(testConfig1.getProperty("property1"), "value1");
+        assertEquals(testConfig1.getProperty("property2"), "value2");
+        assertEquals(testConfig1.isFeatureEnabled("feature1"), Boolean.TRUE);
+        assertEquals(testConfig1.isFeatureEnabled("feature2"), Boolean.FALSE);
+
+        assertNull(testConfig1.getProperty("notExistProperty"));
+        assertNull(testConfig1.getProperty("featureNotExist"));
     }
 
     public void testObtainConfigurationWithParams() throws Exception {
         final Thread currentThread = Thread.currentThread();
-        LiveUpdateManager.getInstance().obtainConfiguration(new HashMap<String, String>(){}, false, new ConfigurationListener() {
+        Map <String, String>params = new HashMap();
+        params.put("param1", "value1");
+
+        LiveUpdateManager.getInstance().obtainConfiguration(params, false, new ConfigurationListener() {
             @Override
             public void onSuccess(final Configuration configuration) {
-                testConfig = configuration;
+                testConfig2 = configuration;
                 currentThread.interrupt();
             }
 
@@ -86,7 +101,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
             Log.i(getName(), "Forced InterruptedException to allow continue the test");
         }
 
-        assertConfig();
+        assertConfig2();
     }
 
     public void testObtainConfigurationWithSegment() throws Exception {
@@ -94,7 +109,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         LiveUpdateManager.getInstance().obtainConfiguration("segment1", new ConfigurationListener() {
             @Override
             public void onSuccess(final Configuration configuration) {
-                testConfig = configuration;
+                testConfig1 = configuration;
                 currentThread.interrupt();
             }
 
@@ -112,7 +127,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
             Log.i(getName(), "Interruption forced");
         }
 
-        assertConfig ();
+        assertConfig1 ();
     }
 
     public void testObtainNonExitingSegment() throws Exception {

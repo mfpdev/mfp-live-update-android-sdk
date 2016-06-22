@@ -34,12 +34,12 @@ android {
         }
     }
 
-    testOptions {
-        unitTests.returnDefaultValues = true
+    lintOptions {
+        disable 'InvalidPackage'
     }
 
-    lintOptions {
-        abortOnError false
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 
 }
