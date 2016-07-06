@@ -7,6 +7,8 @@ MobileFirst Foundation - LiveUpdate Android SDK
 LiveUpdate Android SDK lets you query runtime configuration properties and features which you set in the LiveUpdate Settings screen in the MobileFirst Operations Console.
 With LiveUpdate integrated in your application you can implement feature toggling, A/B testing, feature segmentation and more.
 
+To learn more on how to use the Live Update SDK see following the [tutorial](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/using-the-mfpf-sdk/live-update/).
+
 ###Installation
 
 ### Install Using Gradle
@@ -91,7 +93,7 @@ LiveUpdateManager.getInstance().obtainConfiguration("segment1", false, new Confi
 ###Supported Levels
 - API Level: 16 Android 4.1 and above
 
-Copyright 2015 IBM Corp.
+Copyright 2016 IBM Corp.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
