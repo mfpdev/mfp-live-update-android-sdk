@@ -101,6 +101,19 @@ public class LiveUpdateManager {
     }
 
     /**
+     * obtainConfiguration - obtains a configuration from server / cache
+     * @param useCache - true to use cache, false to always obtains from server
+     * @param configurationListener - the configuration listener for receiving the configuration
+     */
+    public void obtainConfiguration (boolean useCache, ConfigurationListener configurationListener) {
+        URI url = URI.create(SERVICE_URL + "/all");
+
+
+        logger.debug("obtainConfiguration: useCache = " + useCache + ", url = " + url);
+        this.obtainConfiguration("all", url, null, useCache, configurationListener);
+    }
+
+    /**
      * obtainConfiguration - obtains a configuration from server / cache by a segment id
      * </p>
      * The cache is enabled for this API
