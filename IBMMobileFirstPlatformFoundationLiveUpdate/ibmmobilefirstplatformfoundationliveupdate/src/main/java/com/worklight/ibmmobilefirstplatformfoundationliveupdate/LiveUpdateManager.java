@@ -100,6 +100,14 @@ public class LiveUpdateManager {
         }
     }
 
+     /**
+     * obtainConfiguration - obtains a configuration from server/cache
+     * @param configurationListener - the configuration listener for receiving the configuration
+     */
+    public void obtainConfiguration (boolean useCache, ConfigurationListener configurationListener) {
+        this.obtainConfiguration(true, configurationListener);
+    }
+
     /**
      * obtainConfiguration - obtains a configuration from server / cache
      * @param useCache - true to use cache, false to always obtains from server
