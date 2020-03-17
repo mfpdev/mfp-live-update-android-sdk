@@ -104,7 +104,7 @@ public class LiveUpdateManager {
      * obtainConfiguration - obtains a configuration from server/cache
      * @param configurationListener - the configuration listener for receiving the configuration
      */
-    public void obtainConfiguration (boolean useCache, ConfigurationListener configurationListener) {
+    public void obtainConfiguration (ConfigurationListener configurationListener) {
         this.obtainConfiguration(true, configurationListener);
     }
 
@@ -129,7 +129,7 @@ public class LiveUpdateManager {
      * @param segmentId - the segment id
      * @param configurationListener - the configuration listener for receiving the configuration
      */
-    public void obtainConfiguration (String segmentId, ConfigurationListener configurationListener) {
+    private void obtainConfiguration (String segmentId, ConfigurationListener configurationListener) {
         this.obtainConfiguration(segmentId, true, configurationListener);
     }
 
@@ -141,7 +141,7 @@ public class LiveUpdateManager {
      * @param params - the params used by the server to return a configuration.
      * @param configurationListener - the configuration listener for receiving the configuration
      */
-    public void obtainConfiguration (Map<String,String> params, ConfigurationListener configurationListener) {
+    private void obtainConfiguration (Map<String,String> params, ConfigurationListener configurationListener) {
         this.obtainConfiguration(params, true, configurationListener);
     }
 
@@ -151,7 +151,7 @@ public class LiveUpdateManager {
      * @param useCache - true to use cache, false to always obtains from server
      * @param configurationListener - the configuration listener for receiving the configuration
      */
-    public void obtainConfiguration (String segmentId, boolean useCache, ConfigurationListener configurationListener) {
+    private void obtainConfiguration (String segmentId, boolean useCache, ConfigurationListener configurationListener) {
         URI url = URI.create(SERVICE_URL + "/" + segmentId);
 
 
@@ -165,7 +165,7 @@ public class LiveUpdateManager {
      * @param useCache - true to use cache, false to always obtain configuration from server
      * @param configurationListener - the configuration listener for receiving the configuration
      */
-    public void obtainConfiguration (Map<String,String> params, boolean useCache, ConfigurationListener configurationListener) {
+    private void obtainConfiguration (Map<String,String> params, boolean useCache, ConfigurationListener configurationListener) {
         URI url = URI.create(SERVICE_URL);
         String id = buildIDFromParams(params);
 
