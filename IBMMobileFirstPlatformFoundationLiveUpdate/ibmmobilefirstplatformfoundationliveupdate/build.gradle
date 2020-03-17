@@ -24,7 +24,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 8
-        versionName "8.0.0"
+        versionName "8.0.202003051505"
     }
 
     buildTypes {
@@ -51,7 +51,7 @@ dependencies {
 
     compile group: 'com.ibm.mobile.foundation',
             name: 'ibmmobilefirstplatformfoundation',
-            version: '8.0.+',
+            version: '8.0.202003051505',
             ext: 'aar',
             transitive: true
 }
